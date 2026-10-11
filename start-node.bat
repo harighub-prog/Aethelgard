@@ -81,8 +81,18 @@ if exist "%~dp0aethelgard.jar" set "JAR_PATH=%~dp0aethelgard.jar"
 if not defined JAR_PATH if exist "%~dp0target\aethelgard.jar" set "JAR_PATH=%~dp0target\aethelgard.jar"
 
 if not defined JAR_PATH (
-    echo [ERROR] Could not find 'aethelgard.jar'.
-    echo Please ensure aethelgard.jar is in this folder or in the target\ folder.
+    echo [*] Binary 'aethelgard.jar' not found.
+    echo [*] Compiling project automatically via Maven wrapper...
+    if exist "%~dp0mvnw.cmd" (
+        call "%~dp0mvnw.cmd" package -DskipTests -q
+    ) else (
+        call mvn package -DskipTests -q
+    )
+    if exist "%~dp0target\aethelgard.jar" set "JAR_PATH=%~dp0target\aethelgard.jar"
+)
+
+if not defined JAR_PATH (
+    echo [ERROR] Could not compile or find 'aethelgard.jar'.
     pause
     exit /b 1
 )

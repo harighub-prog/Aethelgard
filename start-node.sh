@@ -66,7 +66,20 @@ elif [ -f "${SCRIPT_DIR}/target/aethelgard.jar" ]; then
 fi
 
 if [ -z "$JAR_PATH" ]; then
-    echo "[ERROR] Could not find aethelgard.jar in this directory or target/."
+    echo "[*] Standalone binary 'aethelgard.jar' not found."
+    echo "[*] Compiling project automatically via Maven wrapper..."
+    if [ -f "${SCRIPT_DIR}/mvnw" ]; then
+        sh "${SCRIPT_DIR}/mvnw" package -DskipTests -q
+    else
+        mvn package -DskipTests -q
+    fi
+    if [ -f "${SCRIPT_DIR}/target/aethelgard.jar" ]; then
+        JAR_PATH="${SCRIPT_DIR}/target/aethelgard.jar"
+    fi
+fi
+
+if [ -z "$JAR_PATH" ]; then
+    echo "[ERROR] Could not build or find aethelgard.jar."
     exit 1
 fi
 
