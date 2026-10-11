@@ -62,3 +62,13 @@ yarn-error.log*
 # Docker & Container Temp Files
 .docker/
 docker-compose.override.yml
+
+# Environment Secrets and Cryptographic Material
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+*.jks
+*.keystore
