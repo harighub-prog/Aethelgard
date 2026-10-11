@@ -1,5 +1,16 @@
 # Project Aethelgard
 
+[![Java 21](https://img.shields.io/badge/java21-Java%2021%20LTS-ED8B00?logo=openjdk&logoColor=white)](https://adoptium.net)
+[![Netty](https://img.shields.io/badge/netty-4.1.115.Final-007ACC?logo=apache&logoColor=white)](https://netty.io)
+[![Zero-Trust](https://img.shields.io/badge/zero--trust-ZT--ADS%20Mesh-00C853)](https://github.com/harighub-prog/Aethelgard)
+[![eBPF](https://img.shields.io/badge/ebpf-XDP%20Hardware%20Bypass-FF6F00?logo=linux&logoColor=white)](https://ebpf.io)
+[![Cryptography](https://img.shields.io/badge/cryptography-Dual%20Signatures-7952B3)](https://github.com/harighub-prog/Aethelgard)
+[![P2P Network](https://img.shields.io/badge/p2p--network-Autonomous%20Swarm-blue)](https://github.com/harighub-prog/Aethelgard)
+[![Distributed Systems](https://img.shields.io/badge/distributed--systems-BFT%20Gossip-673AB7)](https://github.com/harighub-prog/Aethelgard)
+[![Cybersecurity](https://img.shields.io/badge/cybersecurity-Real--Time%20Quarantine-D32F2F)](https://github.com/harighub-prog/Aethelgard)
+[![High Performance](https://img.shields.io/badge/high--performance-Zero--Heap--Allocation-009688)](https://github.com/harighub-prog/Aethelgard)
+[![Post-Quantum Cryptography](https://img.shields.io/badge/post--quantum--cryptography-ML--DSA--65-4CAF50)](https://github.com/harighub-prog/Aethelgard)
+
 > **Zero-Trust Autonomous Decentralized Swarm (ZT-ADS) Mesh Engine**  
 > *Engineered in Java 21+ on Netty NIO with Post-Quantum Cryptography, eBPF Kernel Acceleration, and BFT Swarm Clocks.*
 
