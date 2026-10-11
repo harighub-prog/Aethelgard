@@ -1,0 +1,36 @@
+name: Feature Request
+description: Propose a new feature, protocol enhancement, or cryptographic scheme
+title: "[FEAT]: "
+labels: ["enhancement", "proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Propose a technical improvement or architecture extension for Project Aethelgard.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: Is your feature request related to a specific problem or limitation?
+      placeholder: Describe the current operational limitation or requirement.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: Proposed Solution / Architecture
+      description: Describe the technical implementation and design.
+      placeholder: Detailed description of the proposed interface, layer modification, or algorithm.
+    validations:
+      required: true
+
+  - type: textarea
+    id: zero_allocation_impact
+    attributes:
+      label: Memory & Zero-Allocation Impact
+      description: How does this proposal preserve Netty zero-heap-allocation invariants?
+      placeholder: State how buffer lifecycles and off-heap memory will be managed.
+    validations:
+      required: true

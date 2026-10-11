@@ -1,0 +1,66 @@
+name: Bug Report
+description: Create a bug report to help improve Project Aethelgard
+title: "[BUG]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting an issue! Please provide as much technical context as possible.
+
+  - type: dropdown
+    id: layer
+    attributes:
+      label: Affected Subsystem / Layer
+      description: Select the architectural layer where the issue occurs
+      options:
+        - "Layer 1: Transport & Framing (Netty NIO)"
+        - "Layer 2: Ephemeral Identity & mTLS (BouncyCastle)"
+        - "Layer 3: Telemetry Sensor & Autonomous Scorer"
+        - "Layer 4: Gossip Engine & Quarantine Consensus"
+        - "Layer 5: Post-Quantum Cryptographic Agility (ML-DSA)"
+        - "Layer 6: Native Kernel Bridge (Panama FFM / eBPF)"
+        - "Layer 7: Swarm Epoch Manager & BFT Clocks"
+        - "Packaging / CLI / Docker / Deployment"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: Describe what happened versus what you expected to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: How can maintainers reproduce the issue?
+      placeholder: |
+        1. Start genesis node with '--port=8001'
+        2. Connect peer node with '--port=8002 --connect=127.0.0.1:8001'
+        3. Transmit corrupted frame payload
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment & Runtime
+      description: Operating System, JDK distribution, and version.
+      value: |
+        - OS: [e.g. Ubuntu 24.04 / Windows 11]
+        - Java: [e.g. Eclipse Adoptium Temurin 21.0.11]
+        - Maven: [e.g. 3.9.9]
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Log Output
+      description: Stack traces, Netty ResourceLeakDetector warnings, or exception dumps.
+      render: shell
