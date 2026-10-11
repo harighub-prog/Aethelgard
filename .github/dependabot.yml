@@ -1,0 +1,33 @@
+version: 2
+updates:
+  # Monitor Maven Dependencies (Netty, BouncyCastle, JUnit)
+  - package-ecosystem: "maven"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
+      timezone: "Etc/UTC"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "automated-pr"
+    commit-message:
+      prefix: "build(deps)"
+      include: "scope"
+
+  # Monitor GitHub Actions CI/CD Workflows
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
+      timezone: "Etc/UTC"
+    open-pull-requests-limit: 5
+    labels:
+      - "ci"
+      - "automated-pr"
+    commit-message:
+      prefix: "ci(deps)"
+      include: "scope"

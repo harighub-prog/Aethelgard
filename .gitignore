@@ -1,0 +1,64 @@
+# ==============================================================================
+# Project Aethelgard - Git Ignore Rules
+# ==============================================================================
+
+# Compiled Bytecode & Build Artifacts
+target/
+build/
+dist/
+out/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
+
+# Maven Local Wrapper & Temp Tooling
+.mvn/wrapper/maven-wrapper.jar
+temp/
+
+# IDE Configuration & Workspace State
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+!.vscode/settings.json
+.project
+.classpath
+.settings/
+.nb-gradle/
+nbproject/
+*.sublime-project
+*.sublime-workspace
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Logs, Diagnostics & Crash Dumps
+*.log
+*.log.*
+logs/
+hs_err_pid*
+replay_pid*
+core.*
+vgcore.*
+
+# Package Manager & Local Tools
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Docker & Container Temp Files
+.docker/
+docker-compose.override.yml

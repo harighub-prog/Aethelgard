@@ -1,0 +1,39 @@
+# ==============================================================================
+# Project Aethelgard - Git Attributes & Line Ending Normalization
+# ==============================================================================
+
+# Default auto text handling
+* text=auto
+
+# Source Code & Config: Force Unix LF Line Endings
+*.java text eol=lf
+*.xml text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.properties text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.sh text eol=lf
+mvnw text eol=lf
+Dockerfile text eol=lf
+LICENSE text eol=lf
+
+# Windows Batch Scripts: Preserve Windows CRLF Line Endings
+*.bat text eol=crlf
+*.cmd text eol=crlf
+mvnw.cmd text eol=crlf
+
+# Binary Files
+*.jar binary
+*.class binary
+*.so binary
+*.dll binary
+*.dylib binary
+*.tar binary
+*.gz binary
+*.zip binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary

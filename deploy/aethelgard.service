@@ -1,0 +1,44 @@
+[Unit]
+Description=Project Aethelgard Autonomous Mesh Agent Node
+Documentation=https://github.com/aethelgard/aethelgard
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=aethelgard
+Group=aethelgard
+WorkingDirectory=/opt/aethelgard
+
+# Environment variables from config file
+EnvironmentFile=-/etc/default/aethelgard
+
+# Command line execution with JVM tuning & preview features enabled
+ExecStart=/usr/bin/java \
+    --enable-preview \
+    -XX:+UseZGC \
+    -XX:+ZGenerational \
+    -Xms256m \
+    -Xmx1024m \
+    -Djava.security.egd=file:/dev/urandom \
+    -jar /opt/aethelgard/aethelgard.jar \
+    --port=${PORT} \
+    ${EXTRA_ARGS}
+
+# Automatic restart on failure or crashes
+Restart=always
+RestartSec=5s
+
+# File descriptor limits for high-throughput Netty transport
+LimitNOFILE=65536
+LimitNPROC=32768
+
+# Linux security sandbox hardening
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/aethelgard
+PrivateTmp=true
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

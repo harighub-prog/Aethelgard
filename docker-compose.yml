@@ -1,0 +1,113 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Project Aethelgard — Local 3-Node Swarm Simulation Topology
+#
+# Topology:
+#   node-a (genesis peer) ← listens on :8001, root of trust
+#   node-b (follower)     ← listens on :8002, connects to node-a:8001
+#   node-c (follower)     ← listens on :8003, connects to node-a:8001
+#
+# Internal Network:
+#   Containers communicate across dedicated "aethelgard-mesh" bridge network.
+#   DNS resolution allows seamless mTLS discovery via hostname:port.
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: aethelgard-swarm
+
+services:
+
+  # ── node-a: Genesis peer ────────────────────────────────────────────────────
+  node-a:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    image: aethelgard:latest
+    container_name: aethelgard-node-a
+    hostname: node-a
+    networks:
+      - aethelgard-mesh
+    ports:
+      - "8001:8001"
+    command:
+      - "--port=8001"
+      - "--node-id=node-a"
+    environment:
+      - JAVA_TOOL_OPTIONS=-Xlog:gc*:stderr:time:uptimemillis
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z localhost 8001 || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+    restart: on-failure:3
+    stop_grace_period: 10s
+
+  # ── node-b: First follower ──────────────────────────────────────────────────
+  node-b:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    image: aethelgard:latest
+    container_name: aethelgard-node-b
+    hostname: node-b
+    networks:
+      - aethelgard-mesh
+    ports:
+      - "8002:8002"
+    command:
+      - "--port=8002"
+      - "--node-id=node-b"
+      - "--connect=node-a:8001"
+    environment:
+      - JAVA_TOOL_OPTIONS=-Xlog:gc*:stderr:time:uptimemillis
+    depends_on:
+      node-a:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z localhost 8002 || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+    restart: on-failure:3
+    stop_grace_period: 10s
+
+  # ── node-c: Second follower ─────────────────────────────────────────────────
+  node-c:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    image: aethelgard:latest
+    container_name: aethelgard-node-c
+    hostname: node-c
+    networks:
+      - aethelgard-mesh
+    ports:
+      - "8003:8003"
+    command:
+      - "--port=8003"
+      - "--node-id=node-c"
+      - "--connect=node-a:8001"
+    environment:
+      - JAVA_TOOL_OPTIONS=-Xlog:gc*:stderr:time:uptimemillis
+    depends_on:
+      node-a:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z localhost 8003 || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+    restart: on-failure:3
+    stop_grace_period: 10s
+
+networks:
+  aethelgard-mesh:
+    driver: bridge
+    name: aethelgard-mesh
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
